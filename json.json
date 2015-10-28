@@ -1,0 +1,59 @@
+[
+	{
+		"id":1,
+		"code":"1",
+		"description":"ONE",
+		"accounts": [
+			{
+	
+				"id":2,
+				"code":"1.1",
+				"description":"One dot One",
+				"accounts": [
+					{
+	
+						"id":3,
+						"code":"1.1.1",
+						"description":"One dot One dot One",
+						"accounts": []
+					},
+					{
+			
+						"id":4,
+						"code":"1.1.2",
+						"description":"One dot One dot Two",
+						"accounts": []
+					}
+				]
+			},
+			{
+	
+				"id":18,
+				"code":"1.2",
+				"description":"One dot Two",
+				"accounts": []
+			}
+		]
+	},
+	{
+		"id":20,
+		"code":"2",
+		"description":"TWO",
+		"accounts": [
+			{
+	
+				"id":21,
+				"code":"2.1",
+				"description":"Two dot One",
+				"accounts": []
+			},
+			{
+	
+				"id":22,
+				"code":"2.2",
+				"description":"Two dot Two",
+				"accounts": []
+			}
+		]
+	}
+]
