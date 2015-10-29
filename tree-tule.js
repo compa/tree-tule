@@ -1,3 +1,7 @@
+/**
+*	Tree-Tule.js 
+* Tree for angularjs.
+*/
 angular	
 .module('treetule', [])
 .directive('treeTule', ['$compile', function ($compile) {
@@ -7,9 +11,13 @@ angular
 			"treeTule" : "="
 		},
  		link: function (scope, element, attrs) {
-		    "use strict";
-		    //var  ಠ_ಠ = scope.$watchCollection; //hilarious, but not work 
-
+		  "use strict";
+		  //var  ಠ_ಠ = scope.$watchCollection; //hilarious, but not work 
+		  
+		  /*
+			*	Every change in the source. 
+			*	In future should make all operations -  now just [C] in (CRUD)
+		  */
 			scope.$watchCollection('treeTule.data', function(){
 
 				if(!scope.treeTule) return;
@@ -26,6 +34,10 @@ angular
 				});
 			}, true);	
 
+			/*
+			* Event that fires when the user click at the node (always <li>)
+			*	@id primary key from de source. 
+ 			*/
 			scope.clickNode = function (id){
 				findRecursive(
 					scope.treeTule.data, 
@@ -38,7 +50,7 @@ angular
  						var hasList = $("#"+id + ":has(ul)");
 
 						if(!(hasList && hasList.length)	) {
-							$("#"+id ).append(document.createElement("ul"))
+							$("#"+id ).append(document.createElement("ul"));
 							angular.forEach(node[scope.treeTule.childrenField], function (node){
 								$("#"+id+">ul" ).append(
 									$compile(createListNode(
@@ -48,29 +60,33 @@ angular
 									))(scope)
 								)
 							});
-						}		
-
-
-						if (!$('#' + id + ':has(ul)').hasClass('parent_li') || $('#' + id + ':has(ul)').hasClass('super_parent_li') ) 
-						{
-	                        $('#' + id + ':has(ul)').addClass('parent_li');
-
-	                        $('#' + id + '>div').on('click', function (e) {
-	                            var children = $(this).parent('li.parent_li').find(' > ul > li');
-	                            if (children.is(":visible")) {
-	                                children.hide('fast');
-	                            } else {
-	                                children.show('fast');
-	                            }
-	                            e.stopPropagation();
-	                        });
-                    	}
-
+							//for animation.
+							if (!$('#' + id + ':has(ul)').hasClass('parent_li') || $('#' + id + ':has(ul)').hasClass('super_parent_li') ) 
+							{
+              	$('#' + id + ':has(ul)').addClass('parent_li');
+              	$('#' + id + '>div').on('click', function (e) {
+                  var children = $(this).parent('li.parent_li').find(' > ul > li');
+                  if (children.is(":visible")) {
+                      children.hide('fast');
+                  } else {
+                      children.show('fast');
+                  }
+                  e.stopPropagation();
+              	});
+            	}
+						}
 					}
 				);
 			}
 
-
+			/*
+			* Util to find a node in an array of nested objects.
+			* @data 						[Object object] - data source nested objects
+			* @id 							value to find (primary key)
+			*	@idField					property name of primary key
+			* @childrenField 		property name of nested objects
+			* @callback					callback that fires when find the object.
+			*/
 			var findRecursive = function (data, id, idField, childrenField, callback){
 				var lengthSuperior;
 				for (var i = 0, lengthSuperior = data.length; i < lengthSuperior; i++) {
@@ -83,6 +99,17 @@ angular
 				};
 			}
 
+			/*
+			*	Create a node (<li>) with a default template. 
+			*	This function is a dummy. replace assing for $parse and $transclusion.
+			*	Should make entire node with suport for future features like:
+			* 	- buttons
+			*		-	custom templates
+			*		- handle edit
+			*	@id 
+			* @code
+			* @decription
+			*/
 			var createListNode = function (id, code, description)
 			{
 				//var basicTemplateNode = "<li ng-click='clickNode='></li>";
