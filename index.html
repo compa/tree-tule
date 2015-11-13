@@ -8,7 +8,11 @@
     <script src="controller.js"></script>
 </head>
 <body ng-controller="testController">
-    <ul class="tree-tule" tree-tule="treeTuleConfiguration"> </ul>
+    <ul class="tree-tule" tree-tule="treeTuleConfiguration"> 
+        <x-custom-template>
+            <div>pedro pedro pedro</div>
+        </x-custom-template>
+    </ul>
 </body>
 </html>
 
@@ -77,6 +81,10 @@
     .super_parent_li > div{
 
         cursor: pointer;    
+    }
+    x-custom-template {
+
+        display: none;
     }
     /*.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
         background:#eee;
